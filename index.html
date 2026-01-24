@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPS London | Strategic Digital Solutions</title>
+    <title>IPSLONDON | IT Services & Digital Solutions</title>
     <meta name="description"
-        content="Award-winning digital agency crafting premium web experiences, mobile applications, and brand identities.">
+        content="IPSLONDON IT Services - The Power Behind Digital Innovation. Web, App, and IT solutions.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script>
         tailwind.config = {
@@ -40,21 +40,21 @@
                             DEFAULT: "hsl(var(--accent))",
                             foreground: "hsl(var(--accent-foreground))",
                         },
+                        card: {
+                            DEFAULT: "hsl(var(--card))",
+                            foreground: "hsl(var(--card-foreground))",
+                        },
                     },
                     animation: {
                         'float': 'float 8s ease-in-out infinite',
                         'float-delayed': 'float 8s ease-in-out 4s infinite',
-                        'fade-in': 'fadeIn 1s ease-out forwards',
                         'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
                         },
                         slideUp: {
                             '0%': { opacity: '0', transform: 'translateY(30px)' },
@@ -67,8 +67,12 @@
     </script>
     <style>
         :root {
-            --background: 0 0% 100%;
+            --background: 210 40% 98%;
             --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 222.2 84% 4.9%;
             --primary: 221.2 83.2% 53.3%;
             --primary-foreground: 210 40% 98%;
             --secondary: 210 40% 96.1%;
@@ -77,13 +81,21 @@
             --muted-foreground: 215.4 16.3% 46.9%;
             --accent: 210 40% 96.1%;
             --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
             --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
             --ring: 221.2 83.2% 53.3%;
+            --radius: 0.75rem;
         }
 
         .dark {
             --background: 222.2 84% 4.9%;
             --foreground: 210 40% 98%;
+            --card: 222.2 84% 4.9%;
+            --card-foreground: 210 40% 98%;
+            --popover: 222.2 84% 4.9%;
+            --popover-foreground: 210 40% 98%;
             --primary: 217.2 91.2% 59.8%;
             --primary-foreground: 222.2 47.4% 11.2%;
             --secondary: 217.2 32.6% 17.5%;
@@ -92,7 +104,10 @@
             --muted-foreground: 215 20.2% 65.1%;
             --accent: 217.2 32.6% 17.5%;
             --accent-foreground: 210 40% 98%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 210 40% 98%;
             --border: 217.2 32.6% 17.5%;
+            --input: 217.2 32.6% 17.5%;
             --ring: 212.7 26.8% 83.9%;
         }
 
@@ -110,6 +125,17 @@
 
         .dark .glass {
             background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -136,6 +162,15 @@
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
         }
+
+        /* Smooth accordion details */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 </head>
 
@@ -143,13 +178,11 @@
 
     <!-- Theme Toggle Script -->
     <script>
-        // Check local storage or system preference
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
         }
-
         function toggleTheme() {
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
@@ -162,29 +195,25 @@
     </script>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300">
-        <div class="glass absolute inset-0 w-full h-full"></div>
-        <div class="container mx-auto px-6 h-20 flex justify-between items-center relative z-10">
-            <a href="#" class="text-2xl font-bold tracking-tight">IPS <span class="text-primary">London</span>.</a>
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 border-b border-border/50 glass">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight">IPS<span class="text-primary">LONDON</span>.</a>
 
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-muted-foreground">
-                <a href="#work" class="hover:text-foreground transition-colors">Our Work</a>
-                <a href="#services" class="hover:text-foreground transition-colors">Services</a>
-                <a href="#about" class="hover:text-foreground transition-colors">About</a>
-                <a href="#insights" class="hover:text-foreground transition-colors">Insights</a>
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-muted-foreground">
+                <a href="#services" class="hover:text-primary transition-colors">Services</a>
+                <a href="#about" class="hover:text-primary transition-colors">About</a>
+                <a href="#pricing" class="hover:text-primary transition-colors">Pricing</a>
+                <a href="#testimonials" class="hover:text-primary transition-colors">Testimonials</a>
             </div>
 
             <div class="flex items-center gap-4">
                 <button onclick="toggleTheme()"
-                    class="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground focus:outline-none"
-                    aria-label="Toggle Dark Mode">
-                    <!-- Sun Icon -->
+                    class="p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground hover:text-foreground focus:outline-none">
                     <svg class="hidden dark:block w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
                         </path>
                     </svg>
-                    <!-- Moon Icon -->
                     <svg class="block dark:hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
@@ -192,16 +221,15 @@
                     </svg>
                 </button>
                 <a href="#contact"
-                    class="hidden md:inline-flex h-10 items-center justify-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-                    Start Project
+                    class="hidden md:inline-flex h-10 items-center justify-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
+                    Contact Us
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <main class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <!-- Background Elements -->
+    <!-- 1. Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <div class="absolute inset-0 tech-grid z-0"></div>
         <div
             class="absolute top-20 left-10 md:left-1/4 w-72 h-72 bg-blue-500/20 rounded-full blur-[100px] animate-float">
@@ -211,194 +239,587 @@
         </div>
 
         <div class="container mx-auto px-6 relative z-10 text-center">
-            <div class="inline-flex items-center rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground mb-8 animate-slide-up opacity-0"
-                style="animation-delay: 0.1s;">
-                <span class="flex h-2 w-2 rounded-full bg-blue-500 mr-2"></span>
-                Now accepting new projects for Q2 2024
+            <div
+                class="inline-flex items-center rounded-full border border-border bg-secondary px-4 py-1.5 text-xs font-semibold text-secondary-foreground mb-8 animate-slide-up opacity-0 tracking-wider">
+                IPSLONDON IT SERVICES
             </div>
 
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 animate-slide-up opacity-0"
                 style="animation-delay: 0.2s;">
-                Digital Products <br />
-                <span class="text-gradient">Engineered to Perform</span>
+                The Power Behind <br />
+                <span class="text-gradient">Digital Innovation.</span>
             </h1>
 
-            <p class="text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-slide-up opacity-0"
+            <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed animate-slide-up opacity-0"
                 style="animation-delay: 0.3s;">
-                IPS London is a strategic design and development agency. We build scalable platforms, engaging websites,
-                and human-centric products for forward-thinking brands.
+                Where creativity meets technology — delivering modern web, app, and IT solutions that help your business
+                grow with confidence and quality.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up opacity-0"
-                style="animation-delay: 0.4s;">
-                <a href="#work"
-                    class="h-12 px-8 rounded-full bg-primary text-primary-foreground font-semibold flex items-center justify-center hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25">
-                    View Case Studies
-                </a>
+            <div class="animate-slide-up opacity-0" style="animation-delay: 0.4s;">
                 <a href="#contact"
-                    class="h-12 px-8 rounded-full border border-border bg-background hover:bg-muted text-foreground font-semibold flex items-center justify-center transition-all group">
-                    <span>Contact Us</span>
-                    <svg class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
+                    class="h-14 px-10 rounded-full bg-primary text-primary-foreground font-bold text-lg inline-flex items-center justify-center hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25 hover:-translate-y-1">
+                    Contact Us
                 </a>
-            </div>
-        </div>
-    </main>
-
-    <!-- Logo Cloud -->
-    <section class="border-y border-border bg-muted/30 py-12">
-        <div class="container mx-auto px-6">
-            <p class="text-center text-sm font-semibold text-muted-foreground mb-8 uppercase tracking-wider">Trusted by
-                Industry Leaders</p>
-            <div
-                class="flex flex-wrap justify-center gap-12 md:gap-20 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                <!-- Simple svg placeholders for logos -->
-                <div class="h-8 flex items-center font-bold text-xl">ACME Corp</div>
-                <div class="h-8 flex items-center font-bold text-xl">GlobalBank</div>
-                <div class="h-8 flex items-center font-bold text-xl">NexusTech</div>
-                <div class="h-8 flex items-center font-bold text-xl">Starlight</div>
-                <div class="h-8 flex items-center font-bold text-xl">Umbrella</div>
             </div>
         </div>
     </section>
 
-    <!-- Services Grid -->
-    <section id="services" class="py-24 md:py-32 relative">
+    <!-- 2. Features/About Section -->
+    <section class="py-24 bg-muted/30">
         <div class="container mx-auto px-6">
-            <div class="max-w-3xl mx-auto text-center mb-20">
-                <h2 class="text-3xl md:text-5xl font-bold mb-6 tracking-tight">Expertise that drives growth.</h2>
-                <p class="text-lg text-muted-foreground">We don't just build websites; we create comprehensive digital
-                    ecosystems that empower your business to scale.</p>
+            <h2 class="text-3xl font-bold text-center mb-16">High-Impact Solutions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Web Dev -->
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/30 transition-all duration-300 group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Web Development</h3>
+                    <p class="text-muted-foreground">We build responsive, secure, and high-performing websites using
+                        modern frameworks and technologies.</p>
+                </div>
+                <!-- App Dev -->
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/30 transition-all duration-300 group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">App Development</h3>
+                    <p class="text-muted-foreground">Our team delivers custom mobile and desktop apps with seamless
+                        functionality and great user experience.</p>
+                </div>
+                <!-- Graphic Design -->
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/30 transition-all duration-300 group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-600 dark:text-pink-400 mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Graphic Design</h3>
+                    <p class="text-muted-foreground">From branding to UI/UX, we create modern, engaging designs that
+                        leave a lasting impression.</p>
+                </div>
+                <!-- IT & Hosting -->
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/30 transition-all duration-300 group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">IT & Hosting Support</h3>
+                    <p class="text-muted-foreground">We provide 24/7 IT support, reliable hosting, and technical
+                        assistance to keep your business running.</p>
+                </div>
+                <!-- Maintenance -->
+                <div
+                    class="glass-card p-8 rounded-2xl hover:border-primary/30 transition-all duration-300 group md:col-span-2 lg:col-span-2">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-600 dark:text-orange-400 mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Website Maintenance</h3>
+                    <p class="text-muted-foreground w-full md:w-2/3">From regular updates to bug fixing, we ensure your
+                        website stays secure, fast, and error-free.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. About Us Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="w-full lg:w-1/2">
+                    <span class="text-primary font-bold tracking-wider text-sm mb-2 block uppercase">About
+                        IPSLONDON</span>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Your Trusted IT Partner For Business Growth.</h2>
+                    <p class="text-lg text-muted-foreground mb-8 leading-relaxed">
+                        IPSLondon is a registered IT company in the USA, offering complete technology solutions. From
+                        web development, frameworks, and mobile app development to graphic designing, IT support,
+                        hosting, website maintenance, and bug fixing – our dedicated team is here to help your business
+                        succeed.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Expert & Dedicated Team</h3>
+                                <p class="text-muted-foreground mt-1">Our skilled professionals bring innovation and
+                                    excellence to every project.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">24/7 Technical Support</h3>
+                                <p class="text-muted-foreground mt-1">We provide round-the-clock technical support to
+                                    keep your operations running smoothly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 relative">
+                    <div
+                        class="aspect-square bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl overflow-hidden glass border-0 flex items-center justify-center relative">
+                        <!-- Abstract decorative elements -->
+                        <div class="absolute inset-0 bg-primary/5"></div>
+                        <div class="text-center p-10 relative z-10">
+                            <h3 class="text-8xl font-black text-primary/10">IPS</h3>
+                            <p class="text-2xl font-bold mt-4">USA Registered</p>
+                            <p class="text-muted-foreground">Premier IT Solutions</p>
+                        </div>
+                    </div>
+                    <!-- Decorative blob -->
+                    <div
+                        class="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 blur-3xl rounded-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Services Section -->
+    <section id="services" class="py-24 bg-muted/30">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold tracking-wider text-sm mb-2 block uppercase">IPSLONDON
+                    COMPANY</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">Empowering Businesses Through Professional IT Services.
+                </h2>
+                <p class="text-muted-foreground text-lg">We deliver innovative IT solutions that help brands grow,
+                    improve efficiency, and achieve success in today's digital landscape.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- S1 -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Web Development</h3>
+                    <p class="text-sm text-muted-foreground">Build powerful, responsive, and user-friendly websites that
+                        bring your business vision to life online.</p>
+                </div>
+                <!-- S2 -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">IT Management</h3>
+                    <p class="text-sm text-muted-foreground">Streamline operations and ensure smooth performance with
+                        expert IT infrastructure and management support.</p>
+                </div>
+                <!-- S3 -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Digital Marketing</h3>
+                    <p class="text-sm text-muted-foreground">Enhance your online visibility and grow your brand with
+                        targeted digital strategies that drive real results.</p>
+                </div>
+                <!-- S4 -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">App Development</h3>
+                    <p class="text-sm text-muted-foreground">Create high-performing mobile apps with seamless
+                        functionality to engage users and grow your audience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Brand Portfolio Section -->
+    <section class="py-16 border-y border-border">
+        <div class="container mx-auto px-6">
+            <div
+                class="flex flex-wrap justify-center gap-12 md:gap-20 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Brand Placeholders -->
+                <div class="h-10 flex items-center font-bold text-2xl text-muted-foreground">BRAND ONE</div>
+                <div class="h-10 flex items-center font-bold text-2xl text-muted-foreground">BRAND TWO</div>
+                <div class="h-10 flex items-center font-bold text-2xl text-muted-foreground">BRAND THREE</div>
+                <div class="h-10 flex items-center font-bold text-2xl text-muted-foreground">BRAND FOUR</div>
+                <div class="h-10 flex items-center font-bold text-2xl text-muted-foreground">BRAND FIVE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Pricing Section -->
+    <section id="pricing" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 px-4">
+                <span class="text-primary font-bold tracking-wider text-sm mb-2 block uppercase">Start Your
+                    Project</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Choose the Best Plan for You</h2>
+                <p class="text-muted-foreground max-w-2xl mx-auto">Affordable plans with free hosting, VPN setup, and
+                    lower service charges — designed for startups and growing businesses.</p>
+
+                <!-- Discount Banner -->
+                <div
+                    class="mt-8 mx-auto max-w-max bg-yellow-500/10 border border-yellow-500/20 text-yellow-600 dark:text-yellow-400 px-6 py-2 rounded-full font-medium text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                        </path>
+                    </svg>
+                    Get free hosting and VPN setup with all yearly plans! Save up to 25% today.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Basic -->
+                <div class="glass-card rounded-2xl p-8 border hover:border-primary/50 transition-all">
+                    <h3 class="font-bold text-xl mb-2">Basic Website</h3>
+                    <div class="text-4xl font-bold mb-6">$49</div>
+                    <ul class="space-y-3 mb-8 text-sm text-muted-foreground">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>3 Pages Static Website
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Mobile Responsive Design
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Free Hosting (1 Year)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Free Domain Setup
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>VPN Access – Low Cost Setup
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full text-center py-2.5 rounded-lg border border-border hover:bg-primary hover:text-white transition-all font-semibold text-sm">Select
+                        Plan</a>
+                </div>
+
+                <!-- E-Commerce -->
+                <div
+                    class="glass-card rounded-2xl p-8 border border-primary/20 relative shadow-2xl shadow-primary/5 transform scale-105 z-10">
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                        Popular</div>
+                    <h3 class="font-bold text-xl mb-2">E-Commerce Plan</h3>
+                    <div class="text-4xl font-bold mb-6">$99</div>
+                    <ul class="space-y-3 mb-8 text-sm text-muted-foreground">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Up to 20 Products
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Secure Payment Gateway
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Admin Dashboard
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Free Hosting (1 Year)
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>VPN Setup at Discounted Rate
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full text-center py-2.5 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all font-semibold text-sm">Select
+                        Plan</a>
+                </div>
+
+                <!-- Business -->
+                <div class="glass-card rounded-2xl p-8 border hover:border-primary/50 transition-all">
+                    <h3 class="font-bold text-xl mb-2">Business Plan</h3>
+                    <div class="text-4xl font-bold mb-6">$149</div>
+                    <ul class="space-y-3 mb-8 text-sm text-muted-foreground">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Dynamic Business Website
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>CMS Integration
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Free Hosting + SSL
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>VPN Setup with Low Charges
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full text-center py-2.5 rounded-lg border border-border hover:bg-primary hover:text-white transition-all font-semibold text-sm">Select
+                        Plan</a>
+                </div>
+
+                <!-- Premium -->
+                <div class="glass-card rounded-2xl p-8 border hover:border-primary/50 transition-all">
+                    <h3 class="font-bold text-xl mb-2">Premium Corporate</h3>
+                    <div class="text-4xl font-bold mb-6">$199</div>
+                    <ul class="space-y-3 mb-8 text-sm text-muted-foreground">
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Custom Design & Branding
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Database & API Integration
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>Free Hosting + VPN Setup
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>24/7 Priority Support
+                        </li>
+                    </ul>
+                    <a href="#contact"
+                        class="block w-full text-center py-2.5 rounded-lg border border-border hover:bg-primary hover:text-white transition-all font-semibold text-sm">Select
+                        Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ Section -->
+    <section class="py-24 bg-muted/30">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold tracking-wider text-sm mb-2 block uppercase">SOLUTEK COMPANY</span>
+                <h2 class="text-3xl font-bold mb-2">Keeping Your Business Safe and Available</h2>
+                <h3 class="text-xl font-medium text-muted-foreground mb-4">A Comprehensive Guide</h3>
+                <p class="text-sm text-muted-foreground">Alternative innovation network environmental whiteboard pursue
+                    for premier methods empowerment go forward opportunities</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="rounded-xl border border-border bg-card overflow-hidden">
+                    <details class="group">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold">
+                            What Medical Services Do You Provide?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-muted-foreground border-t border-border pt-4">
+                            We offer a comprehensive range of services tailored to your needs. (Placeholder text for
+                            medical services context as requested)
+                        </div>
+                    </details>
+                </div>
+                <div class="rounded-xl border border-border bg-card overflow-hidden">
+                    <details class="group">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold">
+                            What is your customer geography?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-muted-foreground border-t border-border pt-4">
+                            We serve clients globally, with a strong presence in the USA, Europe, and Asia.
+                        </div>
+                    </details>
+                </div>
+                <div class="rounded-xl border border-border bg-card overflow-hidden">
+                    <details class="group">
+                        <summary class="flex items-center justify-between p-6 cursor-pointer font-semibold">
+                            What are the main industries we serve?
+                            <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </summary>
+                        <div class="px-6 pb-6 text-muted-foreground border-t border-border pt-4">
+                            We specialize in IT solutions for healthcare, finance, retail, and startups.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Testimonials Section -->
+    <section id="testimonials" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold tracking-wider text-sm mb-2 block uppercase">TESTIMONIALS</span>
+                <h2 class="text-3xl md:text-5xl font-bold">What Our Clients Say About Us</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div
-                    class="group relative rounded-3xl border border-border bg-card p-8 hover:border-primary/50 transition-colors duration-300">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Web Development</h3>
-                        <p class="text-muted-foreground leading-relaxed">
-                            Robust, scalable, and secure applications built with modern frameworks like React, Next.js,
-                            and Node.js.
-                        </p>
+                <!-- T1 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-border relative">
+                    <svg class="text-primary/20 w-12 h-12 absolute top-6 right-6" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z">
+                        </path>
+                    </svg>
+                    <p class="text-muted-foreground mb-6 italic">"IPSLondon transformed our outdated website into a
+                        modern, responsive platform. Their team is professional, creative, and highly efficient!"</p>
+                    <div>
+                        <div class="font-bold">Sarah Johnson</div>
+                        <div class="text-sm text-primary">Business Owner</div>
                     </div>
                 </div>
-
-                <!-- Service 2 -->
-                <div
-                    class="group relative rounded-3xl border border-border bg-card p-8 hover:border-primary/50 transition-colors duration-300">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">UI/UX Design</h3>
-                        <p class="text-muted-foreground leading-relaxed">
-                            User-centric interfaces that are intuitive, accessible, and visually stunning, driving
-                            higher engagement.
-                        </p>
+                <!-- T2 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-border relative">
+                    <svg class="text-primary/20 w-12 h-12 absolute top-6 right-6" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z">
+                        </path>
+                    </svg>
+                    <p class="text-muted-foreground mb-6 italic">"We hired IPSLondon for app development — the final
+                        product exceeded our expectations. They delivered on time and provided ongoing support even
+                        after launch."</p>
+                    <div>
+                        <div class="font-bold">Michael Lee</div>
+                        <div class="text-sm text-primary">Startup Founder</div>
                     </div>
                 </div>
-
-                <!-- Service 3 -->
-                <div
-                    class="group relative rounded-3xl border border-border bg-card p-8 hover:border-primary/50 transition-colors duration-300">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-orange-500/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="relative z-10">
-                        <div
-                            class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-600 dark:text-pink-400 mb-6 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">Digital Strategy</h3>
-                        <p class="text-muted-foreground leading-relaxed">
-                            Data-driven insights to position your brand effectively, optimize conversion paths, and
-                            maximize ROI.
-                        </p>
+                <!-- T3 -->
+                <div class="p-8 rounded-2xl bg-secondary/50 border border-border relative">
+                    <svg class="text-primary/20 w-12 h-12 absolute top-6 right-6" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z">
+                        </path>
+                    </svg>
+                    <p class="text-muted-foreground mb-6 italic">"Our company relies on IPSLondon for IT and hosting
+                        support. Their 24/7 assistance keeps our systems running smoothly — we highly recommend them!"
+                    </p>
+                    <div>
+                        <div class="font-bold">Emma Wilson</div>
+                        <div class="text-sm text-primary">IT Manager</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-primary/5 dark:bg-primary/10 -skew-y-3 transform origin-top-left scale-110">
-        </div>
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to transform your digital presence?</h2>
-            <p class="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-                Join the forward-thinking companies that trust IPS London to deliver exceptional digital products.
-            </p>
-            <a href="#contact"
-                class="inline-flex h-14 items-center justify-center rounded-full bg-foreground px-8 text-base font-medium text-background shadow transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-                Start Your Project
-            </a>
+    <!-- 9. Contact Section -->
+    <section id="contact" class="py-24 relative overflow-hidden bg-primary/5">
+        <div class="container mx-auto px-6">
+            <div class="glass-card max-w-5xl mx-auto rounded-3xl p-8 md:p-12 border shadow-2xl">
+                <div class="text-center mb-10">
+                    <span class="text-primary font-bold tracking-wider text-sm mb-2 block uppercase">CONTACT US</span>
+                    <h2 class="text-3xl md:text-4xl font-bold">Make an Online Appointment Booking For Business Planning.
+                    </h2>
+                </div>
+
+                <form action="https://formspree.io/f/myyleorq" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Your Name *</label>
+                            <input type="text" name="name" required
+                                class="w-full px-4 py-3 rounded-lg bg-background border border-input focus:ring-2 focus:ring-ring outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Your E-Mail *</label>
+                            <input type="email" name="email" required
+                                class="w-full px-4 py-3 rounded-lg bg-background border border-input focus:ring-2 focus:ring-ring outline-none transition-all">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Subject *</label>
+                            <input type="text" name="subject" required
+                                class="w-full px-4 py-3 rounded-lg bg-background border border-input focus:ring-2 focus:ring-ring outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Phone *</label>
+                            <input type="tel" name="phone" required
+                                class="w-full px-4 py-3 rounded-lg bg-background border border-input focus:ring-2 focus:ring-ring outline-none transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Message</label>
+                        <textarea name="message" rows="4"
+                            class="w-full px-4 py-3 rounded-lg bg-background border border-input focus:ring-2 focus:ring-ring outline-none transition-all"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit"
+                            class="px-8 py-3 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition-all shadow-lg">
+                            SEND NOW
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Address Section -->
+            <div
+                class="max-w-4xl mx-auto mt-12 flex flex-col md:flex-row justify-between items-center bg-card border border-border p-6 rounded-2xl">
+                <div class="text-lg font-semibold">Elevating Customer Experience.</div>
+                <div class="text-xl font-bold text-primary mt-2 md:mt-0 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                        </path>
+                    </svg>
+                    0327-5506382
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-border bg-muted/20 py-16">
+    <footer class="border-t border-border bg-muted/20 py-12">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-2">
-                    <h2 class="text-2xl font-bold tracking-tight mb-4">IPS <span class="text-primary">London</span>.
-                    </h2>
-                    <p class="text-muted-foreground max-w-xs">
-                        London-based digital agency specializing in premium web design, development, and brand strategy.
-                    </p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <h2 class="text-xl font-bold tracking-tight">IPS <span class="text-primary">LONDON</span>.</h2>
+                    <p class="text-sm text-muted-foreground mt-1">© 2024 IPS London. All rights reserved.</p>
                 </div>
-                <div>
-                    <h3 class="font-semibold mb-4">Company</h3>
-                    <ul class="space-y-3 text-sm text-muted-foreground">
-                        <li><a href="#" class="hover:text-foreground transition-colors">About Us</a></li>
-                        <li><a href="#" class="hover:text-foreground transition-colors">Careers</a></li>
-                        <li><a href="#" class="hover:text-foreground transition-colors">Contact</a></li>
-                        <li><a href="#" class="hover:text-foreground transition-colors">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold mb-4">Social</h3>
-                    <ul class="space-y-3 text-sm text-muted-foreground">
-                        <li><a href="#" class="hover:text-foreground transition-colors">Twitter / X</a></li>
-                        <li><a href="#" class="hover:text-foreground transition-colors">LinkedIn</a></li>
-                        <li><a href="#" class="hover:text-foreground transition-colors">Instagram</a></li>
-                        <li><a href="#" class="hover:text-foreground transition-colors">Dribbble</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div
-                class="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-                <p>© 2024 IPS London. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-foreground">Terms</a>
-                    <a href="#" class="hover:text-foreground">Privacy</a>
-                    <a href="#" class="hover:text-foreground">Cookies</a>
+                <div class="flex gap-6 text-sm text-muted-foreground font-medium">
+                    <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+                    <a href="#" class="hover:text-primary transition-colors">Contact</a>
                 </div>
             </div>
         </div>
