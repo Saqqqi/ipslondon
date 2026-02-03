@@ -27,12 +27,13 @@ export default async function RootLayout({
   const theme = cookieStore.get("theme")?.value || "light";
 
   return (
-    <html lang="en" className={theme}>
+    <html lang="en" className={theme} suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 selection:bg-blue-100 dark:selection:bg-blue-900 transition-colors duration-300`}
+        suppressHydrationWarning
       >
         {children}
       </body>
