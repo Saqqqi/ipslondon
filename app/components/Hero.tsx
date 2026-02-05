@@ -54,25 +54,7 @@ export default function Hero() {
                         </Link>
                     </div>
 
-                    {/* Featured Images / Social Proof */}
-                    <div className="mt-20 w-full max-w-4xl px-4">
-                        <div className="relative group overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
-                            <Image
-                                src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
-                                alt="IPSLondon Workspace"
-                                width={1200}
-                                height={600}
-                                className="object-cover w-full aspect-[2/1] transition-transform duration-1000 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent"></div>
-                            <div className="absolute bottom-10 left-10 right-10 flex flex-col sm:flex-row items-end sm:items-center justify-between gap-6">
-                                <div className="text-left">
-                                    <p className="text-white text-2xl font-bold">Innovation Hub</p>
-                                    <p className="text-white/70 text-sm">Where ideas turn into reality.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>

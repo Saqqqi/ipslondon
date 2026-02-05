@@ -54,28 +54,36 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-gray-50 border-t border-gray-200 dark:bg-gray-950 dark:border-gray-800" aria-labelledby="footer-heading">
+        <footer className="relative overflow-hidden bg-white pt-24 dark:bg-gray-950 sm:pt-32" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">Footer</h2>
-            <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
-                <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-                    <div className="space-y-8">
-                        <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
+
+            {/* Design Elements */}
+            <div className="absolute top-0 left-1/2 -z-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-gray-200 to-transparent dark:via-white/10"></div>
+            <div className="absolute -top-24 left-1/2 -z-0 h-48 w-[800px] -translate-x-1/2 rounded-full bg-blue-600/5 blur-[100px]"></div>
+
+            <div className="container relative z-10 mx-auto px-6 lg:px-8">
+                <div className="grid grid-cols-1 gap-12 pb-20 lg:grid-cols-12 lg:gap-8">
+
+                    {/* Brand Section */}
+                    <div className="lg:col-span-4">
+                        <Link href="/" className="flex items-center gap-3 text-2xl font-black tracking-tighter text-gray-900 dark:text-white mb-8">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                                 </svg>
                             </div>
-                            <span>IPSLondon</span>
+                            <span className="uppercase italic tracking-widest">IPSLondon</span>
                         </Link>
-                        <p className="max-w-xs text-sm leading-6 text-gray-600 dark:text-gray-400">
-                            Crafting world-class digital experiences in the heart of London. We build scalable software for ambitious global brands.
+                        <p className="max-w-sm text-lg leading-relaxed text-gray-600 dark:text-gray-400 font-medium italic">
+                            "Engineering the future of London's digital landscape with precision, innovation, and strategic excellence."
                         </p>
-                        <div className="flex space-x-6">
+
+                        <div className="mt-10 flex space-x-4">
                             {socialLinks.map((item) => (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300"
+                                    className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-50 text-gray-400 transition-all hover:bg-blue-600 hover:text-white dark:bg-gray-900 dark:text-gray-500"
                                 >
                                     <span className="sr-only">{item.name}</span>
                                     {item.icon}
@@ -83,53 +91,67 @@ export default function Footer() {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-                        <div className="md:grid md:grid-cols-2 md:gap-8">
-                            <div>
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Solutions</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    {footerLinks.solutions.map((item) => (
-                                        <li key={item.name}>
-                                            <Link href={item.href} className="text-sm leading-6 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400">
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="mt-10 md:mt-0">
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Company</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    {footerLinks.company.map((item) => (
-                                        <li key={item.name}>
-                                            <Link href={item.href} className="text-sm leading-6 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400">
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+
+                    {/* Links Sections */}
+                    <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
+                        <div>
+                            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-900 dark:text-white mb-8">Solutions</h3>
+                            <ul role="list" className="space-y-4">
+                                {footerLinks.solutions.map((item) => (
+                                    <li key={item.name}>
+                                        <Link href={item.href} className="text-sm font-bold text-gray-500 transition-colors hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 uppercase tracking-widest">
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                        <div className="md:grid md:grid-cols-1 md:gap-8">
-                            <div>
-                                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Legal</h3>
-                                <ul role="list" className="mt-6 space-y-4">
-                                    {footerLinks.legal.map((item) => (
-                                        <li key={item.name}>
-                                            <Link href={item.href} className="text-sm leading-6 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400">
-                                                {item.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                        <div>
+                            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-900 dark:text-white mb-8">Company</h3>
+                            <ul role="list" className="space-y-4">
+                                {footerLinks.company.map((item) => (
+                                    <li key={item.name}>
+                                        <Link href={item.href} className="text-sm font-bold text-gray-500 transition-colors hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 uppercase tracking-widest">
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="col-span-2 sm:col-span-1">
+                            <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-900 dark:text-white mb-8">Legal</h3>
+                            <ul role="list" className="space-y-4">
+                                {footerLinks.legal.map((item) => (
+                                    <li key={item.name}>
+                                        <Link href={item.href} className="text-sm font-bold text-gray-500 transition-colors hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 uppercase tracking-widest">
+                                            {item.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div className="mt-16 border-t border-gray-900/10 pt-8 dark:border-white/10 sm:mt-20 lg:mt-24">
-                    <p className="text-xs leading-5 text-gray-500 dark:text-gray-400">
-                        &copy; {currentYear} IPSLondon Limited. Registered in England & Wales.
-                    </p>
+
+                {/* Bottom Bar */}
+                <div className="relative border-t border-gray-100 py-12 dark:border-white/5">
+                    <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+                        <p className="text-xs font-black tracking-widest text-gray-400 uppercase">
+                            &copy; {currentYear} IPSLondon Limited.
+                            <span className="hidden sm:inline mx-2">•</span>
+                            London, United Kingdom
+                        </p>
+
+                        <div className="flex items-center space-x-6">
+                            <div className="flex items-center space-x-2">
+                                <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600/70">Systems Operational</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Decorative Corner Glow */}
+                    <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-blue-600/5 blur-3xl pointer-events-none"></div>
                 </div>
             </div>
         </footer>

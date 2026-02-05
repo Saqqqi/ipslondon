@@ -5,7 +5,7 @@ export default function Pricing() {
         {
             name: "Starter",
             price: "1,999",
-            description: "Perfect for small businesses looking to establish a digital presence.",
+            description: "Perfect for establishing a high-end digital presence.",
             features: [
                 "Custom UI Design",
                 "Responsive Development",
@@ -19,7 +19,7 @@ export default function Pricing() {
         {
             name: "Professional",
             price: "4,999",
-            description: "Comprehensive solutions for growing enterprises demanding more power.",
+            description: "Advanced solutions for ambitious growing enterprises.",
             features: [
                 "Advanced UI/UX Design",
                 "E-commerce Integration",
@@ -34,7 +34,7 @@ export default function Pricing() {
         {
             name: "Enterprise",
             price: "Custom",
-            description: "Bespoke engineering for large-scale global software requirements.",
+            description: "Bespoke engineering for global software requirements.",
             features: [
                 "Dedicated Team Account",
                 "Microservices Architecture",
@@ -49,107 +49,98 @@ export default function Pricing() {
     ];
 
     return (
-        <section id="pricing" className="bg-white py-24 dark:bg-gray-950 sm:py-32">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
-                    <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">Pricing</h2>
-                    <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
-                        Choose the right plan for your growth
-                    </p>
-                    <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-                        Scale your business with transparent, value-driven pricing tailored for every stage of your journey.
+        <section id="pricing" className="relative overflow-hidden bg-white py-24 dark:bg-gray-950 sm:py-32 lg:py-48">
+            {/* Ambient Background Elements */}
+            <div className="absolute top-0 left-1/2 -z-0 h-96 w-full -translate-x-1/2 -translate-y-1/2 bg-blue-500/10 blur-[120px]"></div>
+            <div className="absolute bottom-0 left-1/2 -z-0 h-96 w-full -translate-x-1/2 translate-y-1/2 bg-indigo-500/10 blur-[120px]"></div>
+
+            <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Section Header */}
+                <div className="mx-auto max-w-3xl text-center mb-24">
+                    <div className="inline-flex items-center space-x-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-800 backdrop-blur-sm dark:border-blue-900/50 dark:bg-blue-900/20 dark:text-blue-300 mb-8">
+                        <span className="flex h-2 w-2 rounded-full bg-blue-600"></span>
+                        <span>Tiered Pricing</span>
+                    </div>
+                    <h2 className="text-4xl font-black tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+                        Choose the Right <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Growth Engine</span>
+                    </h2>
+                    <p className="mt-8 text-xl text-gray-600 dark:text-gray-400">
+                        Transparent, value-driven pricing tailored for every stage of your digital journey.
                     </p>
                 </div>
 
-                <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 gap-y-6 sm:mt-20 lg:max-w-none lg:grid-cols-3 lg:gap-x-8">
-                    {plans.map((plan) => (
+                {/* Pricing Grid */}
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                    {plans.map((plan, idx) => (
                         <div
-                            key={plan.name}
-                            className={`relative flex flex-col rounded-3xl p-8 shadow-xl ring-1 transition-all duration-300 hover:scale-[1.02] ${plan.highlighted
-                                    ? "bg-gray-900 ring-gray-900 dark:bg-white dark:ring-white"
-                                    : "bg-white ring-gray-200 dark:bg-gray-900 dark:ring-gray-800"
+                            key={idx}
+                            className={`group relative flex flex-col rounded-[2.5rem] p-10 transition-all duration-500 hover:-translate-y-4 ${plan.highlighted
+                                ? "bg-gray-900 shadow-2xl shadow-blue-500/20 dark:bg-gray-900 dark:ring-1 dark:ring-blue-500/50"
+                                : "bg-white border border-gray-100 shadow-xl dark:bg-gray-900/50 dark:border-white/5"
                                 }`}
                         >
                             {plan.highlighted && (
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                    <span className="inline-flex items-center rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white shadow-sm transition-transform dark:bg-blue-500">
+                                <div className="absolute top-0 right-10 -translate-y-1/2">
+                                    <span className="inline-flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-2 text-xs font-black uppercase tracking-widest text-white shadow-xl">
                                         Most Popular
                                     </span>
                                 </div>
                             )}
 
-                            <div className="mb-8">
-                                <h3
-                                    className={`text-lg font-semibold leading-8 ${plan.highlighted ? "text-blue-400 dark:text-blue-600" : "text-gray-900 dark:text-white"
-                                        }`}
-                                >
+                            <div className="mb-10">
+                                <h3 className={`text-2xl font-black uppercase tracking-widest ${plan.highlighted ? "text-blue-400" : "text-gray-900 dark:text-white"}`}>
                                     {plan.name}
                                 </h3>
-                                <p
-                                    className={`mt-4 text-sm leading-6 ${plan.highlighted ? "text-gray-300 dark:text-gray-600" : "text-gray-600 dark:text-gray-400"
-                                        }`}
-                                >
-                                    {plan.description}
-                                </p>
-                                <p className="mt-6 flex items-baseline gap-x-1">
-                                    <span
-                                        className={`text-4xl font-bold tracking-tight ${plan.highlighted ? "text-white dark:text-gray-900" : "text-gray-900 dark:text-white"
-                                            }`}
-                                    >
-                                        {plan.price === "Custom" ? "" : "£"}
-                                        {plan.price}
+                                <div className="mt-6 flex items-baseline gap-x-2">
+                                    <span className={`text-6xl font-black tracking-tighter ${plan.highlighted ? "text-white" : "text-gray-900 dark:text-white"}`}>
+                                        {plan.price === "Custom" ? "" : "£"}{plan.price}
                                     </span>
                                     {plan.price !== "Custom" && (
-                                        <span
-                                            className={`text-sm font-semibold leading-6 ${plan.highlighted ? "text-gray-300 dark:text-gray-600" : "text-gray-600 dark:text-gray-400"
-                                                }`}
-                                        >
+                                        <span className={`text-sm font-bold uppercase tracking-widest ${plan.highlighted ? "text-white/50" : "text-gray-500 dark:text-gray-400"}`}>
                                             /project
                                         </span>
                                     )}
+                                </div>
+                                <p className={`mt-6 text-lg font-medium leading-relaxed ${plan.highlighted ? "text-gray-400" : "text-gray-600 dark:text-gray-400"}`}>
+                                    {plan.description}
                                 </p>
                             </div>
 
-                            <ul
-                                role="list"
-                                className={`mt-2 space-y-3 text-sm leading-6 ${plan.highlighted ? "text-gray-300 dark:text-gray-600" : "text-gray-600 dark:text-gray-400"
-                                    }`}
-                            >
-                                {plan.features.map((feature) => (
-                                    <li key={feature} className="flex gap-x-3">
-                                        <svg
-                                            className={`h-6 w-5 flex-none ${plan.highlighted ? "text-blue-400 dark:text-blue-600" : "text-blue-600 dark:text-blue-500"
-                                                }`}
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M16.704 4.176a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                clipRule="evenodd"
-                                            />
-                                        </svg>
-                                        {feature}
+                            <ul role="list" className="flex-grow space-y-4 mb-10">
+                                {plan.features.map((feature, fIdx) => (
+                                    <li key={fIdx} className="flex items-start gap-x-4">
+                                        <div className={`mt-1 flex h-5 w-5 flex-none items-center justify-center rounded-full ${plan.highlighted ? "bg-blue-500/20 text-blue-400" : "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"}`}>
+                                            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+                                        <span className={`text-base font-medium ${plan.highlighted ? "text-gray-300" : "text-gray-600 dark:text-gray-300"}`}>
+                                            {feature}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
 
-                            <div className="mt-8">
-                                <Link
-                                    href={plan.price === "Custom" ? "/contact" : "/get-started"}
-                                    className={`block rounded-xl px-3 py-4 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-all active:scale-95 ${plan.highlighted
-                                            ? "bg-blue-600 text-white hover:bg-blue-500 focus-visible:outline-blue-600 dark:bg-blue-500 dark:hover:bg-blue-400"
-                                            : "bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
-                                        }`}
-                                >
-                                    {plan.cta}
-                                </Link>
-                            </div>
+                            <Link
+                                href={plan.price === "Custom" ? "/contact" : "/get-started"}
+                                className={`block w-full rounded-2xl py-5 text-center text-sm font-black uppercase tracking-widest shadow-xl transition-all duration-300 active:scale-95 ${plan.highlighted
+                                    ? "bg-blue-600 text-white hover:bg-blue-500 hover:shadow-blue-500/25"
+                                    : "bg-gray-900 text-white hover:bg-black dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
+                                    }`}
+                            >
+                                {plan.cta}
+                            </Link>
+
+                            {/* Decorative Corner Glow */}
+                            {plan.highlighted && (
+                                <div className="absolute -bottom-px -right-px h-24 w-24 bg-gradient-to-br from-transparent to-blue-500/20 blur-2xl pointer-events-none"></div>
+                            )}
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );
 }
+
