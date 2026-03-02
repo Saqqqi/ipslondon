@@ -48,73 +48,98 @@ export default function Testimonials() {
     const scrollingTestimonials = [...testimonials, ...testimonials];
 
     return (
-        <section id="testimonials" className="relative overflow-hidden bg-white py-24 dark:bg-gray-950 sm:py-32 lg:py-48">
-            {/* Ambient Background Glows */}
-            <div className="absolute top-1/2 left-0 -z-0 h-96 w-96 -translate-y-1/2 rounded-full bg-blue-600/10 blur-[130px]"></div>
-            <div className="absolute bottom-0 right-0 -z-0 h-64 w-64 rounded-full bg-indigo-600/10 blur-[130px]"></div>
+        <section id="testimonials" className="relative overflow-hidden bg-white py-16 dark:bg-gray-950 sm:py-20 lg:py-24">
+            {/* Ambient Background Glows - More subtle */}
+            <div className="absolute top-1/2 left-0 -z-0 h-80 w-80 -translate-y-1/2 rounded-full bg-blue-600/5 blur-[100px]"></div>
+            <div className="absolute bottom-0 right-0 -z-0 h-64 w-64 rounded-full bg-indigo-600/5 blur-[100px]"></div>
 
+            {/* Section Header - Refined */}
             <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Section Header */}
-                <div className="mx-auto max-w-3xl text-center mb-24">
-                    <div className="inline-flex items-center space-x-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-800 backdrop-blur-sm dark:border-blue-900/50 dark:bg-blue-900/20 dark:text-blue-300 mb-8">
-                        <span className="flex h-2 w-2 rounded-full bg-blue-600"></span>
-                        <span>Success Stories</span>
+                <div className="mx-auto max-w-2xl text-center mb-10 lg:mb-12">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/60 bg-blue-50/80 px-3 py-1 text-xs font-medium text-blue-700 backdrop-blur-sm dark:border-blue-800/50 dark:bg-blue-900/20 dark:text-blue-300">
+                        <span className="flex h-1.5 w-1.5 rounded-full bg-blue-600"></span>
+                        Success Stories
                     </div>
-                    <h2 className="text-4xl font-black tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-                        Trusted by London's <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Most Innovative</span> Companies
+
+                    {/* Headline */}
+                    <h2 className="mt-4 text-2xl font-medium tracking-tight text-gray-900 dark:text-white sm:text-3xl lg:text-4xl">
+                        Trusted by London's{' '}
+                        <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+                            Most Innovative
+                        </span>
+                        <br />
+                        Companies
                     </h2>
                 </div>
             </div>
 
-            {/* Infinite Marquee Container */}
-            <div className="relative mt-8 flex overflow-hidden py-10">
+            {/* Infinite Marquee Container - Refined */}
+            <div className="relative mt-6 flex overflow-hidden py-6">
                 <div className="flex animate-marquee hover:pause whitespace-nowrap">
                     {scrollingTestimonials.map((testimonial, idx) => (
                         <div
                             key={idx}
-                            className="mx-4 w-[450px] flex-none rounded-[2.5rem] border border-gray-100 bg-white p-10 shadow-2xl transition-all duration-500 hover:scale-105 hover:shadow-blue-500/10 dark:border-white/5 dark:bg-gray-900/50 dark:backdrop-blur-xl"
+                            className="mx-3 w-[380px] flex-none rounded-xl border border-gray-100 bg-white p-6 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 dark:border-gray-800 dark:bg-gray-900/50 dark:backdrop-blur-sm"
                         >
-                            <div className="flex items-center gap-x-5 mb-8">
-                                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-lg font-black text-white shadow-lg">
+                            {/* Author Info */}
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 text-sm font-medium text-white shadow-sm">
                                     {testimonial.initials}
                                 </div>
                                 <div>
-                                    <div className="text-lg font-black tracking-tight text-gray-900 dark:text-white">
+                                    <div className="text-sm font-semibold text-gray-900 dark:text-white">
                                         {testimonial.author}
                                     </div>
-                                    <div className="text-sm font-bold uppercase tracking-widest text-blue-600/70 dark:text-blue-400/70">
-                                        {testimonial.role}
+                                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                                        {testimonial.role}, {testimonial.company}
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="relative">
-                                <svg
-                                    className="absolute -left-2 -top-4 h-10 w-10 text-blue-500/10 dark:text-blue-500/20"
-                                    fill="currentColor"
-                                    viewBox="0 0 32 32"
-                                >
-                                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                                </svg>
-                                <p className="relative text-lg font-medium leading-relaxed italic text-gray-600 dark:text-gray-300 whitespace-normal">
-                                    "{testimonial.content}"
-                                </p>
-                            </div>
+                            {/* Quote Icon - Subtle */}
+                            <svg
+                                className="mb-2 h-6 w-6 text-blue-200 dark:text-blue-800"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
+                            </svg>
 
-                            <div className="mt-8 flex items-center gap-2">
-                                <div className="h-0.5 w-8 bg-blue-600/30 dark:bg-blue-400/30"></div>
-                                <span className="text-xs font-black uppercase tracking-[0.2em] text-gray-400">{testimonial.company}</span>
+                            {/* Content */}
+                            <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed whitespace-normal">
+                                "{testimonial.content}"
+                            </p>
+
+                            {/* Company Indicator */}
+                            <div className="mt-4 flex items-center gap-2">
+                                <div className="h-px w-6 bg-blue-200 dark:bg-blue-800"></div>
+                                <span className="text-[10px] font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                                    {testimonial.company}
+                                </span>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Fade Edges */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white dark:from-gray-950"></div>
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white dark:from-gray-950"></div>
+                {/* Fade Edges - Refined */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-gray-950 dark:via-gray-950/80"></div>
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white via-white/80 to-transparent dark:from-gray-950 dark:via-gray-950/80"></div>
             </div>
 
-            {/* Custom Animation Styles */}
+            {/* Optional: Static testimonial highlight */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+                <div className="flex justify-center">
+                    <div className="inline-flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Join 150+ satisfied clients</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Custom Animation Styles - Optimized */}
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes marquee {
@@ -122,9 +147,9 @@ export default function Testimonials() {
                     100% { transform: translateX(-50%); }
                 }
                 .animate-marquee {
-                    animation: marquee 40s linear infinite;
+                    animation: marquee 50s linear infinite;
                 }
-                .pause:hover {
+                .hover\\:pause:hover {
                     animation-play-state: paused;
                 }
                 `
@@ -132,4 +157,3 @@ export default function Testimonials() {
         </section>
     );
 }
-
